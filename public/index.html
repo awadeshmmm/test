@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+	<head>
+  		<meta charset="utf-8">
+  		<title>data demo</title>
+  		<style>
+  			div {
+    				color: blue;
+  			}
+  			span {
+    				color: red;
+  			}
+  		</style>
+  		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	</head>
+	
+	<body> 
+		<div>
+  			The users stored are:
+  			<span></span>
+		</div>
+ 
+		<script>
+			// executes when complete page is fully loaded, including all frames, objects and images
+			$(window).load(function() {
+				$.ajax({
+        				method: "GET",
+                			url: "/user"
+        			})
+        			.done(function( msg ) {
+        				console.log( "Data Saved: " , msg );
+					$("div").data( "test", { first: msg[0].name } );
+					$( "span:first" ).text( $( "div" ).data( "test" ).first ); 
+        			});
+			});
+</script>
+ 
+</body>
+</html>
